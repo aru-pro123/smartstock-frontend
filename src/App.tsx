@@ -1,21 +1,34 @@
 
-import { Button } from "@/components/ui/button"
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router"
+
+import AppLayout from "@/components/layout/AppLayout"
+import DashboardPage from "@/features/dashboard/pages/DashboardPage"
 
 function App() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-slate-50">
-      <h1 className="text-3xl font-bold">
-        SmartStock
-      </h1>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<Navigate to="/dashboard" replace />} />
 
-      <p className="text-slate-600">
-        Supermarket Inventory Management System
-      </p>
+          <Route path="dashboard" element={<DashboardPage />} />
+        </Route>
 
-      <Button onClick={() => alert("SmartStock UI is ready!")}>
-        Test SmartStock Button
-      </Button>
-    </div>
+        <Route
+          path="*"
+          element={
+            <div className="p-8">
+              Page not found
+            </div>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
